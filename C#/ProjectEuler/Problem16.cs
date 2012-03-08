@@ -7,8 +7,7 @@ namespace ProjectEuler
 {
     class Problem16
     {
-        //http://stackoverflow.com/questions/677579/project-euler-16-c-2-0
-        //1366
+        
         public void SolveIt()
         {
             double  total = 2;
