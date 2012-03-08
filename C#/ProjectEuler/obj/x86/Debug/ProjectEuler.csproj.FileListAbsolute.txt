@@ -1,0 +1,5 @@
+c:\users\socrates\documents\visual studio 2010\Projects\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.exe
+c:\users\socrates\documents\visual studio 2010\Projects\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.pdb
+c:\users\socrates\documents\visual studio 2010\Projects\ProjectEuler\ProjectEuler\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\socrates\documents\visual studio 2010\Projects\ProjectEuler\ProjectEuler\obj\x86\Debug\ProjectEuler.exe
+c:\users\socrates\documents\visual studio 2010\Projects\ProjectEuler\ProjectEuler\obj\x86\Debug\ProjectEuler.pdb
