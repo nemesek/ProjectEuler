@@ -9,9 +9,9 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-            DateTime start = DateTime.Now;
-            System.Diagnostics.Stopwatch sw = System.Diagnostics.Stopwatch.StartNew();
-            Problem16 p = new Problem16();
+            var start = DateTime.Now;
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var p = new Problem16();
             p.SolveIt();
             sw.Stop();
             Console.WriteLine("Time taken: " + sw.ElapsedMilliseconds);
