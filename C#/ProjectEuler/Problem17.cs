@@ -48,15 +48,13 @@ namespace ProjectEuler
                 {
                     builder.Append("onethousand");
                 }
-
-                 // Grab the tens place
-                else
+                else  // Grab the tens place
                 {
                     MapOneToNinetyNine(i % 100, builder);
                 }
 
                 numbers[i - 1] = builder.ToString();
-            }           
+            }       
             
             var sum = 0;
             sum += numbers.Sum(n => n.Length);
