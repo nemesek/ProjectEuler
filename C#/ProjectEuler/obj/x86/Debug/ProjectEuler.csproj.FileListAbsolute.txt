@@ -13,3 +13,4 @@ C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\ProjectEuler\bin\Debug\Projec
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\ProjectEuler\bin\Debug\ProjectEuler.pdb
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\ProjectEuler\obj\x86\Debug\ProjectEuler.exe
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\ProjectEuler\obj\x86\Debug\ProjectEuler.pdb
+C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\ProjectEuler\obj\x86\Debug\ProjectEuler.csprojResolveAssemblyReference.cache
