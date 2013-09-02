@@ -1,3 +1,4 @@
 <Modules>
   <Module PersistentId="90DBBDA9-E116-4661-8894-9BFCB3B73942" ModuleId="ProjectEuler" />
+  <Module PersistentId="ABF2EA44-0774-4BF4-A9A4-2843F233812D" ModuleId="Euler.Test" />
 </Modules>
