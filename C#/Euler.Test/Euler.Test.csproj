@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Problem20Test.cs" />
     <Compile Include="Problem21Tests.cs" />
+    <Compile Include="Problem22Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Problem19Tests.cs" />
   </ItemGroup>
@@ -59,6 +60,9 @@
       <Project>{90dbbda9-e116-4661-8894-9bfcb3b73942}</Project>
       <Name>ProjectEuler</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="names.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
