@@ -5,3 +5,10 @@ C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectE
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.csprojResolveAssemblyReference.cache
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.dll
 C:\Users\Socrates\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.pdb
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\Euler.Test.dll
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\Euler.Test.pdb
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectEuler.exe
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectEuler.pdb
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.csprojResolveAssemblyReference.cache
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.dll
+C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.pdb
