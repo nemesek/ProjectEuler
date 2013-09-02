@@ -19,8 +19,7 @@ namespace ProjectEuler
         private BigInteger Factorial(int number)
         {
             if (number == 0) return 1;                    
-            return number * Factorial(number - 1);           
-                
+            return number * Factorial(number - 1);        
         }
 
         private BigInteger FindSum(BigInteger num)
