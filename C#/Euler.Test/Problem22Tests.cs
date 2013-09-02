@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProjectEuler;
 
 namespace Euler.Test
 {
@@ -21,7 +23,7 @@ namespace Euler.Test
       public void Problem22_Can_CalculateIndividualName()
       {
           // Arrange
-          var expected = 49714;
+          var expected = 53;
           var target = new Problem22();
 
           // Act
@@ -31,19 +33,59 @@ namespace Euler.Test
           Assert.AreEqual(expected, result);
       }
 
+      [TestMethod]
+      public void Problem22_Can_SolveIt()
+      {
+          // Arrange
+          var expected = 871198282;
+          var target = new Problem22();
+
+          // Act
+          var result = target.SolveIt();
+
+          // Assert
+          Assert.AreEqual(expected, result);
+          
+      }
+
 
     }
 
-    public class Problem22
-    {
-        public int SolveIt()
-        {
-            using(Fil
-        }
+    //public class Problem22
+    //{
 
-        public int CalculateIndivualName(string name)
-        {
-            return 0;
-        }
-    }
+    //    public int SolveIt()
+    //    {
+    //        var text = "";
+    //        var total = 0;
+
+    //        using (var reader = new StreamReader(@"..\..\names.txt"))
+    //        {
+    //            text = reader.ReadToEnd();
+    //        }
+
+    //        var names = text.Split(',').OrderBy(n => n).ToArray();
+
+    //        for (var i = 0; i < names.Count(); i++)
+    //        {
+    //            var nameSum = this.CalculateIndivualName(names[i]);
+    //            total += ((i + 1) * nameSum);
+    //        }
+
+    //        return total;
+    //    }
+
+    //    public int CalculateIndivualName(string name)
+    //    {
+    //        int total = 0;
+
+    //        foreach (var letter in name)
+    //        {
+    //            if (letter < 65 || letter > 90) continue;
+    //            total += letter % 64;
+    //        }
+
+    //        return total;
+    //    }
+    //}
 }
