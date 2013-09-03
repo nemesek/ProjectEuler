@@ -25,7 +25,7 @@ namespace Euler.Test
               var set = new double[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
               // Act
-              var result = this.GetLexographicOrder(set);
+              var result = this.GetLexographicOrder(set).OrderBy(n => n).ToList();
 
               // Assert
               Assert.AreEqual(result[999999], expected);
@@ -33,7 +33,7 @@ namespace Euler.Test
           }
           
           // Recursion slowed it down a bit but I like the solution
-          // Could check if List gets to 10,000 rather than find all perms but maybe another day
+          // Could check if List gets to one million rather than find all perms but maybe another day
           private List<double> GetLexographicOrder(double[] set)
           {
               var orders = new List<double>();
@@ -51,22 +51,24 @@ namespace Euler.Test
               {
                   for (var i = 0; i < set.Length; i++)
                   {
-                      var num = set[i];
-                      var firstNum = num * Math.Pow(10, (set.Length - 1));
-                     
-                      // Generate the perms of the set not including i
-                      var subArray = set.Where(n => n != num).ToArray();
-                      var subPerms = this.GetLexographicOrder(subArray);
-
-                      foreach (var number in subPerms)
+                      if (orders.Count() < 1000001)  // Checking so we don't do unceccessary computations
                       {
-                          orders.Add(firstNum + number);
-                      }
-                      
-                  }
-              }                
+                          var num = set[i];
+                          var firstNum = num * Math.Pow(10, (set.Length - 1));
 
-              return orders.OrderBy(n => n).ToList();
+                          // Generate the perms of the set not including i
+                          var subArray = set.Where(n => n != num).ToArray();
+                          var subPerms = this.GetLexographicOrder(subArray);
+
+                          foreach (var number in subPerms)
+                          {
+                              orders.Add(firstNum + number);
+                          }
+                      }                      
+                  }
+              }
+                
+              return orders;
           }
     }
 }
