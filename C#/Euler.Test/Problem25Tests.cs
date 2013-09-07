@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProjectEuler;
 
 namespace Euler.Test
 {
@@ -50,38 +51,6 @@ namespace Euler.Test
 
             // Assert
             Assert.AreEqual(expected, result);
-        }
-    }
-
-    public class Problem25
-    {
-        public int Solve()
-        {
-            var number = 0;
-            //var number = 2;
-            //BigInteger fib0 = 1;
-            //BigInteger fib1 = 1;
-            //BigInteger fib2 = 0;
-
-            //var bigNumber = BigInteger.Pow(10, 999);
-
-            //while (fib2 / bigNumber < 1)
-            //{
-            //    fib2 = fib0 + fib1;
-            //    number++;
-            //    fib0 = fib1;
-            //    fib1 = fib2;
-
-            //}
-
-            //return number;
-
-            // Use Binet's formula instead where k = number of digits
-
-            var phi = ((Math.Pow(5, 0.5) + 1)/2);
-            var k = 1000;
-            number = (int)((k - 1 + Math.Log10(Math.Pow(5, 0.5)))/Math.Log10(phi)) + 1;
-            return number;
         }
     }
 }
