@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c96577d8-1947-43f5-8717-3277f3f66484</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Problem2.py</StartupFile>
+    <StartupFile>Problem3.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,7 @@
     <Compile Include="Euler.py" />
     <Compile Include="Problem1.py" />
     <Compile Include="Problem2.py" />
+    <Compile Include="Problem3.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
