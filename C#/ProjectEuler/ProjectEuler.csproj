@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Problem1.cs" />
     <Compile Include="Problem12.cs" />
     <Compile Include="Problem13.cs" />
     <Compile Include="Problem14.cs" />
@@ -58,10 +59,13 @@
     <Compile Include="Problem17.cs" />
     <Compile Include="Problem18.cs" />
     <Compile Include="Problem19.cs" />
+    <Compile Include="Problem2.cs" />
     <Compile Include="Problem20.cs" />
     <Compile Include="Problem21.cs" />
     <Compile Include="Problem22.cs" />
     <Compile Include="Problem23.cs" />
+    <Compile Include="Problem24.cs" />
+    <Compile Include="Problem25.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
