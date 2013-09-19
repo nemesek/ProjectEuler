@@ -7,7 +7,11 @@ startTime = datetime.now()
 
 def isPrime(n):
     sqrt = math.floor(math.sqrt(n))
-    if len(list(filter(lambda x : n % x == 0, range(2, sqrt + 1)))) > 0: return False
+    #if len(list(filter(lambda x : n % x == 0, range(2, sqrt + 1)))) > 0: return False
+    #
+    #for x in range(2, sqrt + 1):
+    #    if n % x == 0: return False
+    if any(filter(lambda x : n % x == 0, range(2, sqrt + 1))) > 0: return False
     return True
 
 count = 0

@@ -27,7 +27,8 @@ namespace ProjectEuler
         {
             var squareRoot = (int)Math.Floor(Math.Sqrt(n));
 
-            if (Enumerable.Range(2, squareRoot).Count(x => n % x == 0) > 0) return false;
+            // if (Enumerable.Range(2, squareRoot).Count(x => n % x == 0) > 0) return false;  // 677 ms
+            if (Enumerable.Range(2, squareRoot).Any(x => n % x == 0)) return false; // 122 ms
             return true;
 
         }
