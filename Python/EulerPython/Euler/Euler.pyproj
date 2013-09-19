@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c96577d8-1947-43f5-8717-3277f3f66484</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Problem4.py</StartupFile>
+    <StartupFile>Problem7.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -27,6 +27,9 @@
     <Compile Include="Problem2.py" />
     <Compile Include="Problem3.py" />
     <Compile Include="Problem4.py" />
+    <Compile Include="Problem5.py" />
+    <Compile Include="Problem6.py" />
+    <Compile Include="Problem7.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
