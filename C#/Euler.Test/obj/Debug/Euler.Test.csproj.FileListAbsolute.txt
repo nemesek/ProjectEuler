@@ -12,3 +12,10 @@ C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectE
 C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.csprojResolveAssemblyReference.cache
 C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.dll
 C:\Users\dnemesek\Documents\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.pdb
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\Euler.Test.dll
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\Euler.Test.pdb
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectEuler.exe
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\bin\Debug\ProjectEuler.pdb
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.csprojResolveAssemblyReference.cache
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.dll
+C:\Demo\GitHub\ProjectEuler\C#\Euler.Test\obj\Debug\Euler.Test.pdb
