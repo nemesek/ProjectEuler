@@ -62,6 +62,21 @@ namespace Euler.Test
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void Problem4Imperative()
+        {
+            // Arrange
+            var expected = 906609;
+
+            // Act
+            var result = Enumerable
+                .Range(100, 899)
+                .SelectMany(x => Enumerable.Range(100, 899), (x, y) => x * y)
+                .Where(p => this.IsPalindrome(p)).Max();
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
         private bool IsPalindrome(int number)
         {
             var numDigits = Math.Floor(Math.Log10(number) + 1);
