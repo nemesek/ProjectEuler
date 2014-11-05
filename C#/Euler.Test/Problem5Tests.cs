@@ -27,5 +27,28 @@ namespace Euler.Test
             // Assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Problem5_Functional()
+        {
+            // Arrange
+            const int expected = 232792560;
+            var range = Enumerable.Range(1, 19);
+            var found = false;
+            var number = 2520;
+
+            // Act
+            while (!found)
+            {
+                number += 20;
+                found = range.All(n => number % n == 0);
+                
+            }
+
+            // Assert
+            Assert.AreEqual(expected, number);
+        }
+
+
     }
 }
