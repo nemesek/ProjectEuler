@@ -46,6 +46,22 @@ namespace Euler.Test
 
         }
 
+        [TestMethod]
+        public void Problem4Functional()
+        {
+            // Arrange
+            var expected = 906609;
+
+            // Act
+            var result = Enumerable
+                .Range(100, 899)
+                .SelectMany(x => Enumerable.Range(100, 899), (x, y) => x * y)
+                .Where(p => this.FunctionalIsPalindrome(p)).Max();
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
+
         private bool IsPalindrome(int number)
         {
             var numDigits = Math.Floor(Math.Log10(number) + 1);
@@ -80,6 +96,23 @@ namespace Euler.Test
             if (pre == post) return true;
 
             return false;
+        }
+
+        private bool FunctionalIsPalindrome(int num) 
+        {
+            var reverse = ReverseNum(num);
+            return reverse == num;
+        }
+
+        private int ReverseNum(int num)
+        {
+            int result = 0;
+            while (num > 0)
+            {
+                result = result * 10 + num % 10;
+                num /= 10;
+            }
+            return result;
         }
     }
 }
