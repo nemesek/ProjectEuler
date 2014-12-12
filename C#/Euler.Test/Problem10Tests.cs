@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Euler.Test
@@ -18,7 +15,7 @@ namespace Euler.Test
         public void Problem10_Solve()
         {
             // Arrange
-            var expected = 142913828922;
+            const long expected = 142913828922;
 
             // Act
             var actual = SolveIterative();
@@ -31,7 +28,7 @@ namespace Euler.Test
         public void Problem10_SolveFunctional()
         {
             // Arrange
-            var expected = 142913828922;
+            const long expected = 142913828922;
 
             // Act
             var actual = SolveFunctional();
@@ -49,13 +46,6 @@ namespace Euler.Test
         {
             return Eratostenes().Sum();
         }
-
-        private static bool IsPrime(int primeNumber)
-        {
-            var squareRoot = (int)Math.Sqrt(primeNumber);
-            return Enumerable.Range(2, squareRoot).All(x => primeNumber % x != 0);
-        }
-
         private static IEnumerable<long> Eratostenes()
         {
             const int max = 2000000;
