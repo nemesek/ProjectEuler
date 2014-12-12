@@ -49,6 +49,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BariasProblem10.cs" />
     <Compile Include="Problem10Tests.cs" />
     <Compile Include="Problem1Tests.cs" />
     <Compile Include="Problem20Test.cs" />
