@@ -28,18 +28,42 @@ namespace Euler.Test
 
             // Act
             var result = target.Solve();
-            //GC.Collect();
-            var imperativeResult = ImperativeSolution();
-            //GC.Collect();
-            var imperativeMemoizedResult = ImperativeSolutionMemoized();
-            //GC.Collect();
-            var imperativeArrayMemoizedResult = ImperativeSolutionArrayMemoized();
+            
+            
+            
+            //var imperativeMemoizedResult = ImperativeSolutionMemoized();
+            
+            //var imperativeArrayMemoizedResult = ImperativeSolutionArrayMemoized();
 
             // Assert
             Assert.AreEqual(expected, result);
+            
+            //Assert.AreEqual(expected, imperativeMemoizedResult);
+            //Assert.AreEqual(expected, imperativeArrayMemoizedResult);
+        }
+
+        [TestMethod]
+        public void Problem2_ImperativeReturnsCorrectResult()
+        {
+            var expected = 4613732;
+            var imperativeResult = ImperativeSolution();
             Assert.AreEqual(expected, imperativeResult);
-            Assert.AreEqual(expected, imperativeMemoizedResult);
-            Assert.AreEqual(expected, imperativeArrayMemoizedResult);
+        }
+
+        [TestMethod]
+        public void Problem2_MemoizedDictionaryReturnsCorrectResult()
+        {
+            var expected = 4613732;
+            var imperativeResult = ImperativeSolutionMemoized();
+            Assert.AreEqual(expected, imperativeResult);
+        }
+
+        [TestMethod]
+        public void Problem2_MemoizedArrayReturnsCorrectResult()
+        {
+            var expected = 4613732;
+            var imperativeResult = ImperativeSolutionArrayMemoized();
+            Assert.AreEqual(expected, imperativeResult);
         }
 
         [TestMethod]

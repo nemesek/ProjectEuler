@@ -17,12 +17,10 @@ namespace ProjectEuler
 
             for (var i = 2; max > 0; i++)
             {
-                if (max % i == 0)
-                {
-                    // Grab other factor since it will be larger and check to see if prime
-                    max /= i;
-                    if (IsPrime(max)) return max;
-                }
+                if (max%i != 0) continue;
+                // Grab other factor since it will be larger and check to see if prime
+                max /= i;
+                if (IsPrime(max)) return max;
             }
 
             // If we are here then the original number must be prime...Thus it is the largest prime factor

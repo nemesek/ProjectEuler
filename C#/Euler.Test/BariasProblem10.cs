@@ -11,7 +11,7 @@ namespace Euler.Test
         [TestClass]
         public class BariasTest
         {
-            private readonly List<int> _listPrimes = new List<int>();
+            private readonly List<long> _listPrimes = new List<long>();
             [TestMethod]
             public void Barias_CanSolve10()
             {
@@ -24,9 +24,8 @@ namespace Euler.Test
                 try
                 {
                     var actual = SolveIt();
-                    var x = actual.Sum();
                     // Assert
-                    Assert.AreEqual(expected, x);
+                    Assert.AreEqual(expected, actual);
 
                 }
                 catch (Exception ex)
@@ -37,19 +36,35 @@ namespace Euler.Test
                 
             }
 
-            public IEnumerable<int> SolveIt()
+            public long SolveIt()
             {
                 const int upperBound = 2000000;
-                //var upperBound = 100;
-                var result = Enumerable.Range(2, upperBound - 1).Where(IsPrime).Select(n => n);
-                return result;
+                
+                //var result = Enumerable.Range(2, upperBound ).Where(IsPrime).Select(n => n);
+                //var result = new List<Int64>();
+                _listPrimes.Add(2);
+                for(var i = 3; i < upperBound; i++)
+                {
+                    if (IsPrime2(i))
+                    {
+                        _listPrimes.Add(i);
+                    }
+                }
+
+                var x = _listPrimes.Count();
+                return _listPrimes.ToArray().Sum();
             }
+
 
             private bool IsPrime(int primeTest)
             {
-                var possibleFactors = _listPrimes.Where(x => x <= (int)Math.Floor(Math.Sqrt(primeTest)));
+                //var possibleFactors = _listPrimes.Where(x => x <= (int)Math.Floor(Math.Sqrt(primeTest)));
 
-                if (possibleFactors.Any(pf => primeTest % pf == 0))
+                //if (possibleFactors.Any(pf => primeTest % pf == 0))
+                //{
+                //    return false;
+                //}
+                if (!IsPrime2(primeTest))
                 {
                     return false;
                 }
@@ -59,6 +74,13 @@ namespace Euler.Test
                     return true;
                 }
 
+            }
+
+            private static bool IsPrime2(int primeNumber)
+            {
+                var squareRoot = (int)Math.Sqrt(primeNumber);
+                var y = Enumerable.Range(2, squareRoot).All(x => primeNumber % x != 0);
+                return y;
             }
         
     }
