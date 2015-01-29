@@ -11,8 +11,8 @@ namespace ProjectEuler
         {
             var start = DateTime.Now;
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var p = new Problem18();
-            p.SolveIt();
+            var p = new Problem4();
+            p.Solve();
             sw.Stop();
             Console.WriteLine("Time taken: " + sw.ElapsedMilliseconds);
             

@@ -10,44 +10,22 @@ namespace ProjectEuler
     {
         public int Solve()
         {
-            return Enumerable.Range(100,899).SelectMany(x => Enumerable.Range(100,899), (x,y) => x*y).Where(p => this.IsPalindrome(p)).Max();
+            var result = Enumerable.Range(100, 899)
+                .SelectMany(x => Enumerable.Range(100, 899), (x, y) => x * y)
+                .Where(p => p == ReverseNum(p)).Max();
+
+            return result;
         }
 
-        private bool IsPalindrome(int number)
+        private int ReverseNum(int num)
         {
-
-            var numDigits = Math.Floor(Math.Log10(number) + 1);
-            var half = numDigits / 2;
-            var count = 0;
-            double pre = 0;
-            double post = 0;
-
-            while (count < half)
+            int result = 0;
+            while (num > 0)
             {
-                var digit = number % 10;
-                number /= 10;
-                post += (Math.Pow(10, count) * digit);
-                count++;
+                result = result * 10 + num % 10;
+                num /= 10;
             }
-
-            if (numDigits % 2 == 1)
-            {
-                number /= 10;
-            }
-
-            count--;
-
-            while (count >= 0)
-            {
-                var digit = number % 10;
-                number /= 10;
-                pre += (Math.Pow(10, count) * digit);
-                count--;
-            }
-
-            if (pre == post) return true;
-
-            return false;
+            return result;
         }
     }
 }
