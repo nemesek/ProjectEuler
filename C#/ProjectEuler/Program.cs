@@ -22,8 +22,9 @@ namespace ProjectEuler
                 var sw2 = System.Diagnostics.Stopwatch.StartNew();
                 p.SolveImperative();
                 sw2.Stop();
-                Console.WriteLine("Imperative Time taken: " + sw2.ElapsedMilliseconds);  
-            }         
+                Console.WriteLine("Imperative Time taken: " + sw2.ElapsedMilliseconds);
+                Console.WriteLine("=============================================");
+            }        
                  
         }
     }
