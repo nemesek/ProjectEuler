@@ -10,43 +10,21 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             var start = DateTime.Now;
-            var sw = System.Diagnostics.Stopwatch.StartNew();
             var p = new Problem4();
-            p.Solve();
-            sw.Stop();
-            Console.WriteLine("Time taken: " + sw.ElapsedMilliseconds);
-            
+            for(var i = 0; i < 5; i++)
+            {
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                p.Solve();
+                sw.Stop();
+                Console.WriteLine("Linq Time taken: " + sw.ElapsedMilliseconds);
 
 
-            
-            //double sum = 0;
-            ////Problem 10
-            ////for (int i = 1; i < 2000000; ++i)
-            //for (double i = 2; i < 2000000; ++i)
-            //{
-            //    double sr = Math.Sqrt(i);
-            //    bool isPrime = true;
-            //    double tempSR = Math.Floor(sr);
-            //    for (double j = 2; j <= tempSR; ++j)
-            //    {
-            //        if (i % j == 0)
-            //        {
-            //            isPrime = false;
-            //            j = sr;
-            //        }
-
-            //    }
-            //    if (isPrime)
-            //    {
-            //        sum += i;
-            //    }
-
-            //}
-            //Console.WriteLine("The sum is: " + sum);
-            ////DateTime end = DateTime.Now;
-            //sw.Stop();
-            ////TimeSpan timeTaken = end.Subtract(start);
-           
+                var sw2 = System.Diagnostics.Stopwatch.StartNew();
+                p.SolveImperative();
+                sw2.Stop();
+                Console.WriteLine("Imperative Time taken: " + sw2.ElapsedMilliseconds);  
+            }         
+                 
         }
     }
 }
