@@ -11,29 +11,36 @@ namespace ProjectEuler
             var p = new Problem8();
             p.SolveFast();
             p.SolveSlow();
+            p.SolveParallel();
+            p.SolveParallelFor();
+            p.SolveParallelForEach();
             var sw = Stopwatch.StartNew();
             var max = p.SolveFast();
             sw.Stop();
+            Console.WriteLine("FAST==========================");
             PrintTime(sw, max);
-            var sw2 = Stopwatch.StartNew();
-            var max2 = p.SolveSlow();
-            sw2.Stop();
-            PrintTime(sw2, max2);
-
-            //for(var i = 0; i < 5; i++)
-            //{
-            //    var sw = System.Diagnostics.Stopwatch.StartNew();
-            //    p.Solve();
-            //    sw.Stop();
-            //    Console.WriteLine("Linq Time taken: " + sw.ElapsedMilliseconds);
-
-
-            //    var sw2 = System.Diagnostics.Stopwatch.StartNew();
-            //    p.SolveImperative();
-            //    sw2.Stop();
-            //    Console.WriteLine("Imperative Time taken: " + sw2.ElapsedMilliseconds);
-            //    Console.WriteLine("=============================================");
-            //}        
+            sw.Restart();
+            max = p.SolveSlow();
+            Console.WriteLine("=============================");
+            Console.WriteLine("SLOW=========================");
+            PrintTime(sw, max);
+            sw.Restart();
+            max = p.SolveParallel();
+            Console.WriteLine("=============================");
+            Console.WriteLine("ASPARALLEL====================");
+            PrintTime(sw, max);
+            sw.Restart();
+            max = p.SolveParallelFor();
+            Console.WriteLine("=============================");
+            Console.WriteLine("PARALLELFOR====================");
+            PrintTime(sw, max);
+            sw.Restart();
+            max = p.SolveParallelForEach();
+            Console.WriteLine("=============================");
+            Console.WriteLine("PARALLELFOREACH====================");
+            PrintTime(sw, max);
+            Console.WriteLine("Done");
+            
 
         }
 
