@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace ProjectEuler
 {
@@ -6,11 +7,18 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-            var p = new Problem5();
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            p.Solve();
+
+            var p = new Problem8();
+            p.SolveFast();
+            p.SolveSlow();
+            var sw = Stopwatch.StartNew();
+            var max = p.SolveFast();
             sw.Stop();
-            Console.WriteLine("Time taken " + sw.ElapsedMilliseconds);
+            PrintTime(sw, max);
+            var sw2 = Stopwatch.StartNew();
+            var max2 = p.SolveSlow();
+            sw2.Stop();
+            PrintTime(sw2, max2);
 
             //for(var i = 0; i < 5; i++)
             //{
@@ -27,6 +35,13 @@ namespace ProjectEuler
             //    Console.WriteLine("=============================================");
             //}        
 
+        }
+
+        static void PrintTime(Stopwatch sw, long max)
+        {
+            Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
+            Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
+            Console.WriteLine(max);
         }
     }
 }
