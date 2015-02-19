@@ -129,22 +129,22 @@ namespace ProjectEuler
 
         public long SolveParallelForSafe()
         {
-            //long max = 0;
+            long max = 0;
             var length = NumberAsString.Length;
             var i = 0;
-            var values = new long[1000];
+            //var values = new long[1000];
             Parallel.For(i, length - 13, n =>
             {
                 var number = NumberAsString.Substring(i, 13);
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
-                //if (total > max) max = total;
-                values[i] = total;
+                if (total > max) max = total;
+                //values[i] = total;
                 Interlocked.Increment(ref i);
 
             });
-
-            return values.Max();
+            return max;
+            //return values.Max();
 
         }
 
