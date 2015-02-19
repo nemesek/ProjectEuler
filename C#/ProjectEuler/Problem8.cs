@@ -108,20 +108,43 @@ namespace ProjectEuler
 
         public long SolveParallelFor()
         {
-            long max = 0;
+            //long max = 0;
             var length = NumberAsString.Length;
             var i = 0;
+            var values = new long[1000];
             Parallel.For(i, length - 13, n =>
             {
                 var number = NumberAsString.Substring(i, 13);
                 i++;
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
-                if (total > max) max = total;
+                //if (total > max) max = total;
+                values[i] = total;
                 
             });
 
-            return max;
+            return values.Max();
+
+        }
+
+        public long SolveParallelForSafe()
+        {
+            //long max = 0;
+            var length = NumberAsString.Length;
+            var i = 0;
+            var values = new long[1000];
+            Parallel.For(i, length - 13, n =>
+            {
+                var number = NumberAsString.Substring(i, 13);
+                var total = ComputeProduct(number);
+                //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
+                //if (total > max) max = total;
+                values[i] = total;
+                Interlocked.Increment(ref i);
+
+            });
+
+            return values.Max();
 
         }
 
@@ -130,11 +153,13 @@ namespace ProjectEuler
             long max = 0;
             var length = NumberAsString.Length;
             var i = 0;
+            //var range = new int[1000];
             Parallel.ForEach(NumberAsString, n =>
             {
                 if (i > length - 13) return;
                 var number = NumberAsString.Substring(i, 13);
                 i++;
+                //i = Interlocked.Increment(ref i);
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
                 if (total > max) max = total;
@@ -145,7 +170,29 @@ namespace ProjectEuler
 
         }
 
-        private long ComputeProduct(string number)
+        public long SolveParallelForEachSafe()
+        {
+            long max = 0;
+            var length = NumberAsString.Length;
+            var i = 0;
+            //var range = new int[1000];
+            Parallel.ForEach(NumberAsString, n =>
+            {
+                if (i > length - 13) return;
+                var number = NumberAsString.Substring(i, 13);
+                //i++;
+                var total = ComputeProduct(number);
+                //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
+                Interlocked.Increment(ref i);
+                if (total > max) max = total;
+
+            });
+
+            return max;
+
+        }
+
+        private static long ComputeProduct(string number)
         {
             if (number.Contains('0')) return 0;
             var numericDigits = long.Parse(number);
