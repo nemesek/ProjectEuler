@@ -74,7 +74,7 @@ namespace ConsoleApp1
 
 
 			            Console.WriteLine("++++++++++++++++++++++++++++");
-			            Console.WriteLine("Done Sucka 2 ");
+			            Console.WriteLine("Done Sucka 3 ");
 			            
 
 			        }
@@ -91,7 +91,7 @@ namespace ConsoleApp1
                         //Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
                         //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
                         var date = end - start;
-                        Console.WriteLine(date.Ticks);
+                        Console.WriteLine("Ticks taken: " + date.Ticks);
                         Console.WriteLine("Max " + max);
                     }
         }
@@ -120,6 +120,7 @@ namespace ConsoleApp1
                             + "84580156166097919133875499200524063689912560717606"
                             + "05886116467109405077541002256983155200055935729725"
                             + "71636269561882670428252483600823257530420752963450";
+
         public long SolveFast()
         {
             var length = NumberAsString.Length;
@@ -174,7 +175,7 @@ namespace ConsoleApp1
             return max;
         }
 
-        public long SolveParallel()
+        public long SolveParallel() // todo: still buggy
         {
             long max = 0;
             var length = NumberAsString.Length;
@@ -220,16 +221,16 @@ namespace ConsoleApp1
         {
             long max = 0;
             var length = NumberAsString.Length;
-            var i = 0;
+            //var i = 0;
             //var values = new long[1000];
-            Parallel.For(i, length - 13, n =>
+            Parallel.For(0, length - 13, i =>
             {
                 var number = NumberAsString.Substring(i, 13);
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
                 if (total > max) max = total;
                 //values[i] = total;
-                Interlocked.Increment(ref i);
+                //Interlocked.Increment(ref i);
 
             });
             return max;
@@ -261,10 +262,10 @@ namespace ConsoleApp1
 
         public long SolveParallelForEachSafe()
         {
-            long max = 0;
+            //long max = 0;
             var length = NumberAsString.Length;
             var i = 0;
-            //var range = new int[1000];
+            var range = new long[1000];
             Parallel.ForEach(NumberAsString, n =>
             {
                 if (i > length - 13) return;
@@ -272,12 +273,13 @@ namespace ConsoleApp1
                 //i++;
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
+                range[i] = total;
                 Interlocked.Increment(ref i);
-                if (total > max) max = total;
+                //if (total > max) max = total;
 
             });
 
-            return max;
+            return range.Max();
 
         }
 
