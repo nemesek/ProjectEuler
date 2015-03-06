@@ -1,14 +1,103 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+//using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
-namespace ProjectEuler
+namespace ConsoleApp1
 {
-    public class Problem8
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+			var p = new Problem8();
+			            p.SolveFast();
+			            p.SolveSlow();
+			            p.SolveParallel();
+			            p.SolveParallelFor();
+			            p.SolveParallelForSafe();
+			            p.SolveParallelForEach();
+			            p.SolveParallelForEachSafe();
+			            var start = DateTime.Now;
+
+			            var max = p.SolveFast();
+			            var end = DateTime.Now;  
+			            Console.WriteLine("==========================FAST==========================");
+			            PrintTime(max, start, end);
+
+
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveSlow();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================SLOW=========================");
+			            PrintTime(max, start, end);
+
+
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveParallel();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================ASPARALLEL====================");
+			            PrintTime(max, start, end);
+
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveParallelFor();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================PARALLELFOR====================");
+			            PrintTime(max, start, end);
+
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveParallelForSafe();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================PARALLELFORSafe====================");
+			            PrintTime(max, start, end);
+			            
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveParallelForEach();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================PARALLELFOREACH====================");
+			            PrintTime(max, start, end);
+
+			            //sw.Restart();
+                        start = DateTime.Now;
+			            max = p.SolveParallelForEachSafe();
+                        end = DateTime.Now;
+			            Console.WriteLine("==========================PARALLELFOREACHSafe====================");
+			            PrintTime(max, start, end);
+
+
+			            Console.WriteLine("++++++++++++++++++++++++++++");
+			            Console.WriteLine("Done Sucka 3 ");
+			            
+
+			        }
+
+			        static void PrintTime(long max)
+			        {
+			            //Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
+			            //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
+			            Console.WriteLine("Max " + max);
+			        }
+
+                    static void PrintTime(long max, DateTime start, DateTime end)
+                    {
+                        //Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
+                        //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
+                        var date = end - start;
+                        Console.WriteLine("Ticks taken: " + date.Ticks);
+                        Console.WriteLine("Max " + max);
+                    }
+        }
+    }
+
+      public class Problem8
     {
         // Find the greatest product of five consecutive digits in the 1000-digit number.
         const string NumberAsString = @"73167176531330624919225119674426574742355349194934"
@@ -31,6 +120,7 @@ namespace ProjectEuler
                             + "84580156166097919133875499200524063689912560717606"
                             + "05886116467109405077541002256983155200055935729725"
                             + "71636269561882670428252483600823257530420752963450";
+
         public long SolveFast()
         {
             var length = NumberAsString.Length;
@@ -85,7 +175,7 @@ namespace ProjectEuler
             return max;
         }
 
-        public long SolveParallel()
+        public long SolveParallel() // todo: still buggy
         {
             long max = 0;
             var length = NumberAsString.Length;
@@ -131,16 +221,16 @@ namespace ProjectEuler
         {
             long max = 0;
             var length = NumberAsString.Length;
-            var i = 0;
+            //var i = 0;
             //var values = new long[1000];
-            Parallel.For(i, length - 13, n =>
+            Parallel.For(0, length - 13, i =>
             {
                 var number = NumberAsString.Substring(i, 13);
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
                 if (total > max) max = total;
                 //values[i] = total;
-                Interlocked.Increment(ref i);
+                //Interlocked.Increment(ref i);
 
             });
             return max;
@@ -172,10 +262,10 @@ namespace ProjectEuler
 
         public long SolveParallelForEachSafe()
         {
-            long max = 0;
+            //long max = 0;
             var length = NumberAsString.Length;
             var i = 0;
-            //var range = new int[1000];
+            var range = new long[1000];
             Parallel.ForEach(NumberAsString, n =>
             {
                 if (i > length - 13) return;
@@ -183,12 +273,13 @@ namespace ProjectEuler
                 //i++;
                 var total = ComputeProduct(number);
                 //Console.WriteLine("Processing {0} on thread {1}", i, Thread.CurrentThread.ManagedThreadId);
+                range[i] = total;
                 Interlocked.Increment(ref i);
-                if (total > max) max = total;
+                //if (total > max) max = total;
 
             });
 
-            return max;
+            return range.Max();
 
         }
 
@@ -207,5 +298,5 @@ namespace ProjectEuler
 
             return total;
         }
-    }
+    
 }

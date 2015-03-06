@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 
 namespace ProjectEuler
 {
@@ -9,23 +7,67 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-            var start = DateTime.Now;
-            var p = new Problem4();
-            for(var i = 0; i < 5; i++)
-            {
-                var sw = System.Diagnostics.Stopwatch.StartNew();
-                p.Solve();
-                sw.Stop();
-                Console.WriteLine("Linq Time taken: " + sw.ElapsedMilliseconds);
+
+            var p = new Problem8();
+            p.SolveFast();
+            p.SolveSlow();
+            p.SolveParallel();
+            p.SolveParallelFor();
+            p.SolveParallelForSafe();
+            p.SolveParallelForEach();
+            p.SolveParallelForEachSafe();
+            var sw = Stopwatch.StartNew();
 
 
-                var sw2 = System.Diagnostics.Stopwatch.StartNew();
-                p.SolveImperative();
-                sw2.Stop();
-                Console.WriteLine("Imperative Time taken: " + sw2.ElapsedMilliseconds);
-                Console.WriteLine("=============================================");
-            }        
-                 
+            var max = p.SolveFast();
+            sw.Stop();
+            Console.WriteLine("==========================FAST==========================");
+            PrintTime(sw, max);
+
+
+            sw.Restart();
+            max = p.SolveSlow();
+            Console.WriteLine("==========================SLOW=========================");
+            PrintTime(sw, max);
+
+
+            sw.Restart();
+            max = p.SolveParallel();
+            Console.WriteLine("==========================ASPARALLEL====================");
+            PrintTime(sw, max);
+
+            sw.Restart();
+            max = p.SolveParallelFor();
+            Console.WriteLine("==========================PARALLELFOR====================");
+            PrintTime(sw, max);
+
+            sw.Restart();
+            max = p.SolveParallelForSafe();
+            Console.WriteLine("==========================PARALLELFORSafe====================");
+            PrintTime(sw, max);
+            
+            sw.Restart();
+            max = p.SolveParallelForEach();
+            Console.WriteLine("==========================PARALLELFOREACH====================");
+            PrintTime(sw, max);
+
+            sw.Restart();
+            max = p.SolveParallelForEachSafe();
+            Console.WriteLine("==========================PARALLELFOREACHSafe====================");
+            PrintTime(sw, max);
+
+
+            Console.WriteLine("++++++++++++++++++++++++++++");
+            Console.WriteLine("Done");
+            
+
+        }
+
+        static void PrintTime(Stopwatch sw, long max)
+        {
+            //Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
+            Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
+            Console.WriteLine("Max " + max);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Euler.Test
             var target = new Problem8();
 
             // Act
-            var result = target.SolveIt();
+            var result = target.SolveFast();
 
             // Assert
             Assert.AreEqual(expected, result);
