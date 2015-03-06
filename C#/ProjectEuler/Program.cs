@@ -27,23 +27,26 @@ namespace ProjectEuler
 
         public static int GetNumberOfFactors(int number)
         {
-            return GetFactors(number).Count;
+            //double result = ;
+            var isSquare = Math.Abs(Math.Sqrt(number) % 1) < Double.Epsilon;
+            return isSquare ? GetFactors(number) - 1 : GetFactors(number);
         }
 
-        public static List<int> GetFactors(int number)
+        public static int GetFactors(int number)
         {
-            var factors = new List<int>();
+            //var factors = new List<int>();
             var square = Math.Sqrt(number);
-
-            for (var i = 1; i <= square; i++)
+            var count = 2;
+            for (var i = 2; i <= square; i++)
             {
                 if (number%i != 0) continue;
-                factors.Add(i);
-                var otherFactor = number/i;
-                if (otherFactor != i) factors.Add(otherFactor);
+                count += 2;
+                //factors.Add(i);
+                //var otherFactor = number/i;
+                //if (otherFactor != i) factors.Add(otherFactor);
             }
 
-            return factors;
+            return count;
         }
 
         static void PrintTime(Stopwatch sw, long max)
