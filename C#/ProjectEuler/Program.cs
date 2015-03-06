@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace ProjectEuler
@@ -7,66 +8,48 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-
-            var p = new Problem8();
-            p.SolveFast();
-            p.SolveSlow();
-            p.SolveParallel();
-            p.SolveParallelFor();
-            p.SolveParallelForSafe();
-            p.SolveParallelForEach();
-            p.SolveParallelForEachSafe();
+            var number = 0;
+            var triangularNumber = 0;
+            var numFactors = 0;
             var sw = Stopwatch.StartNew();
 
+            while (numFactors <= 500)
+            {
+                number++;
+                triangularNumber += number;
+                numFactors = GetNumberOfFactors(triangularNumber);
+            }
 
-            var max = p.SolveFast();
             sw.Stop();
-            Console.WriteLine("==========================FAST==========================");
-            PrintTime(sw, max);
+            PrintTime(sw, triangularNumber);
 
+        }
 
-            sw.Restart();
-            max = p.SolveSlow();
-            Console.WriteLine("==========================SLOW=========================");
-            PrintTime(sw, max);
+        public static int GetNumberOfFactors(int number)
+        {
+            return GetFactors(number).Count;
+        }
 
+        public static List<int> GetFactors(int number)
+        {
+            var factors = new List<int>();
+            var square = Math.Sqrt(number);
 
-            sw.Restart();
-            max = p.SolveParallel();
-            Console.WriteLine("==========================ASPARALLEL====================");
-            PrintTime(sw, max);
+            for (var i = 1; i <= square; i++)
+            {
+                if (number%i != 0) continue;
+                factors.Add(i);
+                var otherFactor = number/i;
+                if (otherFactor != i) factors.Add(otherFactor);
+            }
 
-            sw.Restart();
-            max = p.SolveParallelFor();
-            Console.WriteLine("==========================PARALLELFOR====================");
-            PrintTime(sw, max);
-
-            sw.Restart();
-            max = p.SolveParallelForSafe();
-            Console.WriteLine("==========================PARALLELFORSafe====================");
-            PrintTime(sw, max);
-            
-            sw.Restart();
-            max = p.SolveParallelForEach();
-            Console.WriteLine("==========================PARALLELFOREACH====================");
-            PrintTime(sw, max);
-
-            sw.Restart();
-            max = p.SolveParallelForEachSafe();
-            Console.WriteLine("==========================PARALLELFOREACHSafe====================");
-            PrintTime(sw, max);
-
-
-            Console.WriteLine("++++++++++++++++++++++++++++");
-            Console.WriteLine("Done");
-            
-
+            return factors;
         }
 
         static void PrintTime(Stopwatch sw, long max)
         {
-            //Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
-            Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
+            Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
+            //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
             Console.WriteLine("Max " + max);
         }
     }
