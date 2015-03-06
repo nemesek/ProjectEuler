@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ProjectEuler
 {
@@ -10,10 +7,10 @@ namespace ProjectEuler
 
         public void SolveIt()
         {
-            bool foundIt = false;
-            int i = 1;
+            var foundIt = false;
+            var i = 1;
             long num = 0;
-             while (!foundIt)
+            while (!foundIt)
             {
                 int numDiv = 0;
                 long n = i * (i + 1) / 2;
@@ -30,7 +27,7 @@ namespace ProjectEuler
                     }
                     numDiv *= 2;
 
-                    if (numDiv > 6)
+                    if (numDiv > 500)
                     {
                         foundIt = true;
                         num = n;
@@ -39,8 +36,52 @@ namespace ProjectEuler
                 ++i;
 
             }
-            System.Console.WriteLine("The number is: " + num);
+            Console.WriteLine("The number is: " + num);
         }
+
+        public int SolveIt2()
+        {
+            var number = 0;
+            var triangularNumber = 0;
+            var numFactors = 0;
+
+            while (numFactors <= 500)
+            {
+                number++;
+                triangularNumber += number;
+                numFactors = GetNumberOfFactors(triangularNumber);
+            }
+
+            Console.WriteLine("The number is: " + triangularNumber);
+            return triangularNumber;
+            
+        }
+
+        public static int GetNumberOfFactors(int number)
+        {
+            //double result = ;
+            var isSquare = Math.Abs(Math.Sqrt(number) % 1) < Double.Epsilon;
+            return isSquare ? GetFactors(number) - 1 : GetFactors(number);
+        }
+
+        public static int GetFactors(int number)
+        {
+            //var factors = new List<int>();
+            var square = Math.Sqrt(number);
+            var count = 2;
+            for (var i = 2; i <= square; i++)
+            {
+                if (number % i != 0) continue;
+                count += 2;
+                //factors.Add(i);
+                //var otherFactor = number/i;
+                //if (otherFactor != i) factors.Add(otherFactor);
+            }
+
+            return count;
+        }
+
+
 
     }
 }

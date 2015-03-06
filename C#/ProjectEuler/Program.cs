@@ -8,48 +8,16 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-            var number = 0;
-            var triangularNumber = 0;
-            var numFactors = 0;
             var sw = Stopwatch.StartNew();
-
-            while (numFactors <= 500)
-            {
-                number++;
-                triangularNumber += number;
-                numFactors = GetNumberOfFactors(triangularNumber);
-            }
-
+            var problem = new Problem12();
+            problem.SolveIt2();
+            var num = 1;
             sw.Stop();
-            PrintTime(sw, triangularNumber);
+            PrintTime(sw, num);
 
         }
 
-        public static int GetNumberOfFactors(int number)
-        {
-            //double result = ;
-            var isSquare = Math.Abs(Math.Sqrt(number) % 1) < Double.Epsilon;
-            return isSquare ? GetFactors(number) - 1 : GetFactors(number);
-        }
-
-        public static int GetFactors(int number)
-        {
-            //var factors = new List<int>();
-            var square = Math.Sqrt(number);
-            var count = 2;
-            for (var i = 2; i <= square; i++)
-            {
-                if (number%i != 0) continue;
-                count += 2;
-                //factors.Add(i);
-                //var otherFactor = number/i;
-                //if (otherFactor != i) factors.Add(otherFactor);
-            }
-
-            return count;
-        }
-
-        static void PrintTime(Stopwatch sw, long max)
+        static void PrintTime(Stopwatch sw, int max)
         {
             Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
             //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
