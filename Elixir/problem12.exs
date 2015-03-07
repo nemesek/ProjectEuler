@@ -16,6 +16,6 @@ defmodule Problem12 do
     end
   end
 end
-
+#:timer.tc(Problem12,:solve,[500])
 
 #76576500
