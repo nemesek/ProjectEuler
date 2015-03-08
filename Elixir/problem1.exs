@@ -1,11 +1,11 @@
 defmodule Problem1 do
-  def solve(n) do _filterList(n, &(rem(&1,3) == 0 || rem(&1,5) == 0), []) |> _sum(0) end
-  defp _filterList(1, _, acc) do acc end
-  defp _filterList(n, condition, acc) do
+  def solve(n) do _generateList(n, &(rem(&1,3) == 0 || rem(&1,5) == 0), []) |> _sum(0) end
+  defp _generateList(1, _, acc) do acc end
+  defp _generateList(n, condition, acc) do
     if condition.(n) do
-      _filterList(n-1, condition, [n | acc])
+      _generateList(n-1, condition, [n | acc])
     else
-      _filterList(n-1, condition, acc)
+      _generateList(n-1, condition, acc)
     end
   end
   defp _sum([], acc) do acc end
