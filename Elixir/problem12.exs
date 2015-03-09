@@ -1,11 +1,14 @@
 defmodule Problem12 do
-  def solve(numDiv) do _solve(1, numDiv, false, 1) end
-  defp _solve(_, _, true, acc) do acc end
-  defp _solve(n, numDiv, false, acc) do
+  def solve(numDiv, fun) do _solve(1, numDiv, fun, false, 1) end
+  def solveSlow(numDiv) do solve(numDiv, fn x -> getNumDivisors(x) end) end
+  def solveFast(numDiv) do solve(numDiv, fn x -> getNumFactors(x) end) end
+  defp _solve(_, _, _,true, acc) do acc end
+  defp _solve(n, numDiv, fun, false, acc) do
     acc = acc + n + 1
-    _solve(n+1, numDiv, getNumDivisors(acc) > numDiv, acc)
+    _solve(n+1, numDiv, fun, fun.(acc) > numDiv, acc)
   end
 
+  # slower
   def getNumDivisors(n) do _getNumDivisors(n,trunc(:math.sqrt(n)),0) end
   defp _getNumDivisors(_, 1, acc) do 2 + acc end
   defp _getNumDivisors(n, d, acc) do
@@ -17,14 +20,7 @@ defmodule Problem12 do
   end
 
   # faster
-  def solve2(numDiv) do _solve2(1, numDiv, false, 1) end
-  defp _solve2(_, _, true, acc) do acc end
-  defp _solve2(n, numDiv, false, acc) do
-    acc = acc + n + 1
-    _solve2(n+1, numDiv, getNumFactors(acc) > numDiv, acc)
-  end
-
-  # my implementation of tau to get num factors
+  # my implementation of tau to get num divisors
   def getNumFactors(n) do
     primeFactors(n)
     |> Enum.group_by(fn x -> x end)
