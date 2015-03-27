@@ -1,8 +1,7 @@
 defmodule Problem21 do
   def solve do
     doubleSum = _solve(10000, [])
-    |> reduce(0,fn(x,y) -> x + y end)
-
+    |> List.foldl(0, fn(x,y) -> x + y end)
     div doubleSum,2
   end
 
@@ -22,26 +21,21 @@ defmodule Problem21 do
 
   def getSumOfDivisors(n) do
     getProperDivisors(n)
-    |> reduce(0,fn(x,y) -> x + y end)
+    |> List.foldl(0,fn(x,y) -> x + y end)
   end
 
   def getProperDivisors(n) do _getProperDivisors(n,trunc(:math.sqrt(n)),[]) end
   defp _getProperDivisors(_, 1, acc) do [1|acc] end
   defp _getProperDivisors(n, d, acc) do
     if rem(n,d) == 0 do
-      list = [d|acc]
       o = div n,d
       if(d == o) do
-        _getProperDivisors(n, d - 1, list)
+        _getProperDivisors(n, d - 1, [d|acc])
       else
-        _getProperDivisors(n, d - 1, [o|list])
+        _getProperDivisors(n, d - 1, [o|[d|acc]])
       end
     else
       _getProperDivisors(n, d - 1, acc)
     end
   end
-
-  def reduce([], value, _), do: value
-  def reduce([head|tail], value, func), do: reduce(tail, func.(head,value), func)
-
 end
