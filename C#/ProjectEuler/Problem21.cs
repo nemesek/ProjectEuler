@@ -14,10 +14,10 @@ namespace ProjectEuler
             for (var i = 1; i < 10000; i++)
             {
                 var possibleMatch = FindSumOfProperDivisors(i);
-
+                if (possibleMatch == i) continue;
                 if (possibleMatch >= 10000) continue;
 
-                if (FindSumOfProperDivisors(possibleMatch) != i || possibleMatch == i) continue;
+                if (FindSumOfProperDivisors(possibleMatch) != i) continue;
                 AmicableNumbers.Add(i);
                 AmicableNumbers.Add(possibleMatch);
             }
