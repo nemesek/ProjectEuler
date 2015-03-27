@@ -9,9 +9,8 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             var sw = Stopwatch.StartNew();
-            var problem = new Problem12();
-            problem.SolveIt2();
-            var num = 1;
+            var problem = new Problem21();
+            var num = problem.SolveIt();
             sw.Stop();
             PrintTime(sw, num);
 

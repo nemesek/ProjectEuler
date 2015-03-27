@@ -1,26 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjectEuler
 {
     public class Problem21
     {
-        private static List<int> amicableNumbers = new List<int>();
+        private static readonly List<int> AmicableNumbers = new List<int>();
 
         public int SolveIt()
         {
+            // 31626
             for (var i = 1; i < 10000; i++)
             {
-                var possibleMatch = this.FindSumOfProperDivisors(i);
+                var possibleMatch = FindSumOfProperDivisors(i);
 
                 if (possibleMatch >= 10000) continue;
 
-                if (this.FindSumOfProperDivisors(possibleMatch) != i || possibleMatch == i) continue;
-                amicableNumbers.Add(i);
-                amicableNumbers.Add(possibleMatch);
+                if (FindSumOfProperDivisors(possibleMatch) != i || possibleMatch == i) continue;
+                AmicableNumbers.Add(i);
+                AmicableNumbers.Add(possibleMatch);
             }
 
-            return amicableNumbers.Sum() / 2;
+            return AmicableNumbers.Sum() / 2;
         }
 
 
@@ -28,10 +30,14 @@ namespace ProjectEuler
         {
             var divisors = new List<int>();
 
-            for (var i = 1; i <= (number / 2); i++)
+            for (var i = 1; i <= Math.Sqrt(number); i++)
             {
-                if (number % i == 0)
-                    divisors.Add(i);
+                if (number%i != 0) continue;
+                divisors.Add(i);
+                var otherFactor = number / i;
+                if (otherFactor == i) continue;
+                if (otherFactor == number) continue;
+                divisors.Add(otherFactor);
             }
 
             return divisors.Sum();
