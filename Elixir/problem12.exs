@@ -1,65 +1,45 @@
 defmodule Problem12 do
-  def solve(numDiv) do _solve(1, 1, numDiv, false) end
-  defp _solve(_, candidate, _, true) do candidate end
-  defp _solve(n, _, numDiv, false) do
-    candidate = getTriangularFast(n)
-    # d1+d2+(d1-1)*(d2-1)-1 where d1,d2 are the divisor count of the factors (i, i+1/2)
-    #d1 = getNumDivisors(n)
-    #d2 = getNumDivisors(div((n+1),2))
-    #numDivisors = d1 + d2 + (d1 - 1) * (d2 - 1) - 1
-    #isLarger = numDivisors > numDiv
-    _solve(n+1, candidate, numDiv, getNumFactors(candidate) > numDiv)
-    #_solve(n+1, candidate, numDiv, isLarger)
+  def solve(numDiv, fun) do _solve(1, numDiv, fun, false, 1) end
+  def solveSlow(numDiv) do solve(numDiv, fn x -> getNumDivisors(x) end) end
+  def solveFast(numDiv) do solve(numDiv, fn x -> getNumFactors(x) end) end
+  defp _solve(_, _, _,true, acc) do acc end
+  defp _solve(n, numDiv, fun, false, acc) do
+    acc = acc + n + 1
+    _solve(n+1, numDiv, fun, fun.(acc) > numDiv, acc)
   end
 
-  # def getNumDivisors(n) do _getNumDivisors(n,n,0) end
-  # defp _getNumDivisors(_, 1, acc) do 1 + acc end
-  # defp _getNumDivisors(n, d, acc) do
-  #   cond do
-  #     n == d -> _getNumDivisors(n, div(d,2), acc + 1)
-  #     rem(n,d) == 0 -> _getNumDivisors(n, d-1, acc + 1)
-  #     true -> _getNumDivisors(n, d-1, acc)
-  #   end
-  # end
-
-  defp getNumFactors(n) do length(_factors(n, div(n, 2))) + 1 end
-  defp _factors(1, _), do: [1]
-  defp _factors(_, 1), do: [1]
-  defp _factors(n, i) do
-    if rem(n, i) == 0 do
-      [i| _factors(n, i-1)]
+  # slower
+  def getNumDivisors(n) do _getNumDivisors(n,trunc(:math.sqrt(n)),0) end
+  defp _getNumDivisors(_, 1, acc) do 2 + acc end
+  defp _getNumDivisors(n, d, acc) do
+    if rem(n,d) == 0 do
+      _getNumDivisors(n, d - 1, acc + 2)
     else
-      _factors(n, i-1)
+      _getNumDivisors(n, d - 1, acc)
     end
   end
 
-
-  def getTriangularFast(n) do div(n * (n+1),2) end
-  defp getTriangular(n) do _getTriangular(n, 0) end
-  defp _getTriangular(1, acc) do acc + 1 end
-  defp _getTriangular(n, acc) do _getTriangular(n-1,acc + n) end  # tail call optimized
-
-
-end
-
-defmodule PrimeFactors do
-  def of(n) do
-    factors(n, div(n, 2)) |> Enum.filter(&is_prime?/1)
+  # faster
+  # my implementation of tau to get num divisors
+  def getNumFactors(n) do
+    primeFactors(n)
+    |> Enum.group_by(fn x -> x end)
+    |> Dict.values
+    |> Enum.map(fn x -> length(x) + 1 end)
+    |> List.foldr(1, fn (x,y) -> x * y end)
   end
 
-  def factors(1, _), do: [1]
-  def factors(_, 1), do: [1]
-  def factors(n, i) do
-    if rem(n, i) == 0 do
-      [i|factors(n, i-1)]
+  defp primeFactors(n) do _primeFactors(n,2,[]) end
+  defp _primeFactors(1, _, acc) do acc end
+  defp _primeFactors(2, _, acc) do [2|acc] end
+  defp _primeFactors(n, d, acc) do
+    if(rem(n,d) == 0) do
+      _primeFactors(div(n,d), d, [d|acc])
     else
-      factors(n, i-1)
+      _primeFactors(n, d + 1, acc)
     end
   end
-
-  def is_prime?(n) do
-    factors(n, div(n, 2)) == [1]
-  end
 end
+#:timer.tc(Problem12,:solve,[500])
 
 #76576500
