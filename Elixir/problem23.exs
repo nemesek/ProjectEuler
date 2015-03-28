@@ -1,13 +1,23 @@
 defmodule Problem23 do
-  def sumAllPairs(list) do
-    Enum.map(list, fn(x) -> _sumElementWithAll(x,list) end)
-    |> Enum.concat()
-    |> Enum.filter(fn(e) -> e != 0 end)
-    |> distinct()
+  def solve(n) do
+    #28123
+    upperBound = n
+    abundants = _getAbundants(upperBound, [])
+    abunSums = _sumAllPairs(abundants,upperBound,[])
+    range = Enum.to_list 1..upperBound
+    list = Enum.filter(range, fn(e) -> !Enum.member?(abunSums,e) end)
+    List.foldl(list, 0, fn(x,y) -> x + y end)
   end
 
-  def _sumElementWithAll(n, list) do
-    Enum.map(list, fn(x) -> if(x != n) do x + n else 0 end end)
+  def _sumElementWithAll(n, list, upper) do
+    Enum.map(list, fn(x) -> if(x + n < upper) do x + n end end)
+    |> Enum.filter(fn(x) -> x != nil end)
+  end
+
+  def _sumAllPairs([],_, acc) do acc end
+  def _sumAllPairs([head|tail],upper, acc) do
+    l = _sumElementWithAll(head,tail,upper)
+    _sumAllPairs(tail, upper, l ++ acc) # last arg which side is on ++ makes huge perf impact
   end
 
   def distinct(list) do _distinct(list,[]) end
