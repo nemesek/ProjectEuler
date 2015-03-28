@@ -8,7 +8,9 @@ defmodule Problem23 do
     upperBound = n - 1
     abundants = _getAbundants(upperBound, [])
     abunSums = _sumAllPairs(abundants,upperBound,[])
+    # sortedSums = Enum.sort(abunSums)
     range = Enum.to_list 1..upperBound
+    # list = Enum.filter(range, fn(e) -> binarySearch(sortedSums,e) == -1 end)
     list = Enum.filter(range, fn(e) -> !Enum.member?(abunSums,e) end)
     List.foldl(list, 0, fn(x,y) -> x + y end)
   end
@@ -24,15 +26,30 @@ defmodule Problem23 do
     _sumAllPairs(tail, upper, l ++ acc) # last arg which side is on ++ makes huge perf impact
   end
 
-  def distinct(list) do _distinct(list,[]) end
-  defp _distinct([], acc) do acc end
-  defp _distinct([head|tail], acc) do
-    if(!Enum.member?(acc,head)) do
-      _distinct(tail, [head|acc])
-    else
-      _distinct(tail, acc)
-    end
-  end
+  # def binarySearch(list, key) do _binSearch(list,key,0,Enum.count(list) - 1) end
+  # defp _binSearch(list,key,low,high) do
+  #   if(high < low) do
+  #     -1
+  #   else
+  #     mid = div(low + high,2)
+  #     item = Enum.at(list,mid)
+  #     cond do
+  #       key < item -> _binSearch(list,key,low,mid - 1)
+  #       key > item -> _binSearch(list,key,mid + 1, high)
+  #       true -> mid
+  #     end
+  #   end
+  # end
+
+  # def distinct(list) do _distinct(list,[]) end
+  # defp _distinct([], acc) do acc end
+  # defp _distinct([head|tail], acc) do
+  #   if(!Enum.member?(acc,head)) do
+  #     _distinct(tail, [head|acc])
+  #   else
+  #     _distinct(tail, acc)
+  #   end
+  # end
 
   def _getAbundants(1, acc) do acc end
   def _getAbundants(n, acc) do
