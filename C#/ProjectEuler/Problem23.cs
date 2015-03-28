@@ -17,35 +17,35 @@ namespace ProjectEuler
          * that cannot be expressed as the sum of two abundant numbers is less than this limit.
          * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
          */
+        private int _upperBound = 28124;
+        private int[] cache = new int[100000];
+        //private int _upperBound = 10000;
 
-        private static List<int> abundantNumbers = new List<int>();
+        private static List<int> _abundantNumbers = new List<int>();
 
         public int SolveIt()
         {
             var numbers = new List<int>();
-            abundantNumbers = this.GetAbundantNumbers();
+            _abundantNumbers = this.GetAbundantNumbers();
 
-            for (var i = 1; i < 28124; i++)
+            for (var i = 1; i < _upperBound; i++)
             {
-                if (!this.DoesPairExist(i))
-                    numbers.Add(i);
+                if (!DoesPairExist(i)) numbers.Add(i);
             }
 
             return numbers.Sum();
         }
 
-        private bool DoesPairExist(int number)
+        private static bool DoesPairExist(int number)
         {
-            
-
             // since list is sorted can just reduce the array in linear time
             var result = false;
             var lowIndex = 0;
-            var highIndex = abundantNumbers.Count() - 1;
+            var highIndex = _abundantNumbers.Count() - 1;
 
             while (lowIndex <= highIndex)
             {
-                var sum = abundantNumbers[lowIndex] + abundantNumbers[highIndex];
+                var sum = _abundantNumbers[lowIndex] + _abundantNumbers[highIndex];
 
                 if (sum == number)
                 {
@@ -68,9 +68,9 @@ namespace ProjectEuler
         private List<int> GetAbundantNumbers()
         {
             var numbers = new List<int>();
-            for (var i = 1; i < 28124; i++)
+            for (var i = 1; i < _upperBound; i++)
             {
-                var sum = this.FindSumOfProperDivisors(i);
+                var sum = FindSumOfProperDivisorsWithCache(i);
                 if (sum <= i) continue;
                 numbers.Add(i);
             }
@@ -79,7 +79,28 @@ namespace ProjectEuler
             return numbers;
         }
 
-        private int FindSumOfProperDivisors(int number)
+        private int FindSumOfProperDivisorsWithCache(int number)
+        {
+            if (cache[number] != 0) return cache[number];
+
+            var divisors = new List<int>();
+
+            for (var i = 1; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i != 0) continue;
+                divisors.Add(i);
+                var otherFactor = number / i;
+                if (otherFactor == i) continue;
+                if (otherFactor == number) continue;
+                divisors.Add(otherFactor);
+            }
+
+            var sum = divisors.Sum();
+            cache[number] = sum;
+            return sum;
+        }
+
+        private static int FindSumOfProperDivisors(int number)
         {
             var divisors = new List<int>();
 
