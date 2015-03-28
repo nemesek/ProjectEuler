@@ -18,6 +18,7 @@ namespace ProjectEuler
          * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
          */
         private int _upperBound = 28124;
+        private int[] cache = new int[100000];
         //private int _upperBound = 10000;
 
         private static List<int> _abundantNumbers = new List<int>();
@@ -71,13 +72,34 @@ namespace ProjectEuler
             var numbers = new List<int>();
             for (var i = 1; i < _upperBound; i++)
             {
-                var sum = FindSumOfProperDivisors(i);
+                var sum = FindSumOfProperDivisorsWithCache(i);
                 if (sum <= i) continue;
                 numbers.Add(i);
             }
 
 
             return numbers;
+        }
+
+        private int FindSumOfProperDivisorsWithCache(int number)
+        {
+            if (cache[number] != 0) return cache[number];
+
+            var divisors = new List<int>();
+
+            for (var i = 1; i <= Math.Sqrt(number); i++)
+            {
+                if (number % i != 0) continue;
+                divisors.Add(i);
+                var otherFactor = number / i;
+                if (otherFactor == i) continue;
+                if (otherFactor == number) continue;
+                divisors.Add(otherFactor);
+            }
+
+            var sum = divisors.Sum();
+            cache[number] = sum;
+            return sum;
         }
 
         private static int FindSumOfProperDivisors(int number)
