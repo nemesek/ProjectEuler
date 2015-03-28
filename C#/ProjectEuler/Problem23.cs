@@ -38,8 +38,6 @@ namespace ProjectEuler
 
         private static bool DoesPairExist(int number)
         {
-            
-
             // since list is sorted can just reduce the array in linear time
             var result = false;
             var lowIndex = 0;
