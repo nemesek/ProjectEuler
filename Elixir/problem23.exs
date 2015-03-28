@@ -1,39 +1,31 @@
 defmodule Problem23 do
   def solve(n) do
     #28123
-    upperBound = n
+    upperBound = n - 1
     abundants = _getAbundants(upperBound, [])
-    abunSums = _sumAllPairs(abundants,upperBound,[])
     range = Enum.to_list 1..upperBound
-    list = Enum.filter(range, fn(e) -> !Enum.member?(abunSums,e) end)
+    list = Enum.filter(range, fn(e) -> !doesPairExist(abundants,e) end)
     List.foldl(list, 0, fn(x,y) -> x + y end)
   end
 
-  def _sumElementWithAll(n, list, upper) do
-    Enum.map(list, fn(x) -> if(x + n < upper) do x + n end end)
-    |> Enum.filter(fn(x) -> x != nil end)
-  end
-
-  def _sumAllPairs([],_, acc) do acc end
-  def _sumAllPairs([head|tail],upper, acc) do
-    l = _sumElementWithAll(head,tail,upper)
-    _sumAllPairs(tail, upper, l ++ acc) # last arg which side is on ++ makes huge perf impact
-  end
-
-  def distinct(list) do _distinct(list,[]) end
-  defp _distinct([], acc) do acc end
-  defp _distinct([head|tail], acc) do
-    if(!Enum.member?(acc,head)) do
-      _distinct(tail, [head|acc])
+  def doesPairExist(list,n) do _doesPairExist(list,n,0,Enum.count(list) - 1) end
+  defp _doesPairExist(list,n,low,high) do
+    if(low > high) do
+      false
     else
-      _distinct(tail, acc)
+      sum = Enum.at(list,low) + Enum.at(list,high)
+      cond do
+        sum == n -> true
+        sum > n -> _doesPairExist(list,n,low,high - 1)
+        sum < n -> _doesPairExist(list,n,low + 1, high)
+      end
     end
   end
 
   def _getAbundants(1, acc) do acc end
   def _getAbundants(n, acc) do
     sum = getSumOfDivisors(n)
-    if(n <= sum) do
+    if(n < sum) do
       _getAbundants(n-1, [n|acc])
     else
       _getAbundants(n-1, acc)
