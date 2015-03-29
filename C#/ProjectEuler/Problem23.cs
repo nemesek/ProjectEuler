@@ -20,7 +20,7 @@ namespace ProjectEuler
          */
         private int _upperBound = 28124;
         private int[] cache = new int[100000];
-        //private int _upperBound = 1000;
+        //private int _upperBound = 10000;
 
         private static List<int> _abundantNumbers = new List<int>();
 
@@ -46,6 +46,43 @@ namespace ProjectEuler
                 .SelectMany(x => _abundantNumbers, (x, y) => numbers.Remove(x + y)).ToList();
 
             return numbers.Sum();
+        }
+
+        public int SolveIt3()
+        {
+            var numbers = Enumerable.Range(1, _upperBound - 1);
+            _abundantNumbers = this.GetAbundantNumbers();
+
+            var sums = GenerateSums(_abundantNumbers);
+
+            var nonSummables = numbers.Where(n => BinarySearch(sums, n) == -1);
+
+            return nonSummables.Sum();
+        }
+
+        private static int BinarySearch(int[] collection, int value)
+        {
+            var low = 0;
+            var high = collection.Count() - 1;
+
+            while (low <= high)
+            {
+                var mid = (low + high)/2;
+                var item = collection[mid];
+
+                if (item == value) return mid;
+                if (item > value) --high;
+                if (item < value) ++low;
+            }
+
+            return -1;
+        }
+
+        private int[] GenerateSums(IEnumerable<int> collection)
+        {
+            return (from c in collection from n in collection select c + n)
+                .OrderBy(n => n)
+                .ToArray();
         }
 
 
