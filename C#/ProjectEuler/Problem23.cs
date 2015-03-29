@@ -45,23 +45,8 @@ namespace ProjectEuler
             var sums = _abundantNumbers
                 .SelectMany(x => _abundantNumbers, (x, y) => numbers.Remove(x + y)).ToList();
 
-            
-                
-
-
-            //for (var i = 1; i < _upperBound; i++)
-            //{
-            //    if (!DoesPairExist(i)) numbers.Add(i);
-            //}
-
             return numbers.Sum();
         }
-
-        private static void FilterOut(int x, int y, ICollection<int> numbers)
-        {
-            numbers.Remove(x + y);
-        }
-
 
 
         private static bool DoesPairExist(int number)
