@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace ProjectEuler
          */
         private int _upperBound = 28124;
         private int[] cache = new int[100000];
-        //private int _upperBound = 10000;
+        //private int _upperBound = 1000;
 
         private static List<int> _abundantNumbers = new List<int>();
 
@@ -35,6 +36,33 @@ namespace ProjectEuler
 
             return numbers.Sum();
         }
+
+        public int SolveIt2()
+        {
+            var numbers = Enumerable.Range(1, _upperBound).ToList();
+            _abundantNumbers = this.GetAbundantNumbers();
+
+            var sums = _abundantNumbers
+                .SelectMany(x => _abundantNumbers, (x, y) => numbers.Remove(x + y)).ToList();
+
+            
+                
+
+
+            //for (var i = 1; i < _upperBound; i++)
+            //{
+            //    if (!DoesPairExist(i)) numbers.Add(i);
+            //}
+
+            return numbers.Sum();
+        }
+
+        private static void FilterOut(int x, int y, ICollection<int> numbers)
+        {
+            numbers.Remove(x + y);
+        }
+
+
 
         private static bool DoesPairExist(int number)
         {

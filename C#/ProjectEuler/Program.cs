@@ -12,6 +12,9 @@ namespace ProjectEuler
             var problem = new Problem23();
             var num = problem.SolveIt();
             sw.Stop();
+            
+            Console.WriteLine(num);
+
             PrintTime(sw, num);
 
         }
