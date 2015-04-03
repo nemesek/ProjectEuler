@@ -8,9 +8,11 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
+            // var expected = 2783915460;
             var sw = Stopwatch.StartNew();
-            var problem = new Problem23();
-            var num = problem.SolveIt3();
+            var problem = new Problem24();
+            var set = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var num = problem.Solve(set);
             sw.Stop();
             
             Console.WriteLine(num);
@@ -19,7 +21,7 @@ namespace ProjectEuler
 
         }
 
-        static void PrintTime(Stopwatch sw, int max)
+        static void PrintTime(Stopwatch sw, double max)
         {
             Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
             //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
