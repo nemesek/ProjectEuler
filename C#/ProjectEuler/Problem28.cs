@@ -7,15 +7,18 @@ namespace ProjectEuler
     {
         public int Solve()
         {
+            // 669171001
             var left = GenerateLeftDiagonal(1001);
             var right = GenerateRightDiagonal(1001);
+            //var join = left.Concat(right).Distinct();
             return left.Sum() + right.Sum();
+
         }
 
         private static IEnumerable<int> GenerateLeftDiagonal(int spiral)
         {
             var acc = 1;
-            var list = new List<int>() { acc };
+            var list = new List<int>(){acc};
             for (var i = 1; i < spiral; i++)
             {
                 acc += 2 * i;
@@ -28,7 +31,7 @@ namespace ProjectEuler
         private static IEnumerable<int> GenerateRightDiagonal(int spiral)
         {
             var acc = 1;
-            var list = new List<int>() { };
+            var list = new List<int>();
             for (var i = 2; i <= spiral; i++)
             {
                 acc += 2 * i;

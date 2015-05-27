@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace ProjectEuler
 {
@@ -16,7 +17,7 @@ namespace ProjectEuler
 
         }
 
-        static void PrintTime(Stopwatch sw, double max)
+        static void PrintTime(Stopwatch sw, int max)
         {
             Console.WriteLine("Elapsed Milliseconds " + sw.ElapsedMilliseconds);
             //Console.WriteLine("Elapsed Ticks " + sw.ElapsedTicks);
