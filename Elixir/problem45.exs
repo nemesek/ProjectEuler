@@ -7,11 +7,7 @@ defmodule Problem45 do
   defp _solve(n, _, false) do
     t = _getTriangular n
     found = _isPentagonal? t
-    if found do
-      _solve(n, t, true)
-    else
-      _solve(n+2, t, false)
-    end
+    _solve(n + 2, t, found)
   end
 
   defp _getTriangular n do
