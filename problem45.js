@@ -1,26 +1,30 @@
 (function () {
+    var time = process.hrtime();
     //console.log(solve(287, 0, false));
     console.log(solve(287));
+    var diff = process.hrtime(time);
+    console.log(diff);
 })();
 
-/*function* solve (n, t, found) {
-    if (found) return t;
+// function* solve (n, t, found) {
+//     if (found) return t;
 
-    var next = getTriangular(n);
-    var isWinner = isPentagonal(next);
-    yield solve(n + 2, next, isWinner);
-}*/
+//     var next = getTriangular(n);
+//     var isWinner = isPentagonal(next);
+//     yield solve(n + 2, next, isWinner);
+// }
 
 function solve (n) {
     var found = false;
-    var next = 0;
+    var candidate = 0;
+
     while (!found) {
-        next = getTriangular(n);
-        found = isPentagonal(next);
+        candidate = getTriangular(n);
+        found = isPentagonal(candidate);
         n = n + 2;
     }
 
-    return next;
+    return candidate;
 }
 
 function getTriangular (n) {
