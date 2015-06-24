@@ -33,5 +33,5 @@ function getTriangular (n) {
 
 function isPentagonal (n) {
     var num = Math.sqrt(1 + 24 * n) + 1;
-    return num % 6 == 0;
+    return num % 6 === 0;
 }
