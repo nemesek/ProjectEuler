@@ -1,6 +1,6 @@
 defmodule Problem45 do
   #:timer.tc(Problem45, :solve, [])
-  def solve do _solve(40757, 0, false) end
+  def solve do _solve(287, 0, false) end
   # every hexagonal number is an odd triangular number
   # https://en.wikipedia.org/wiki/Hexagonal_number
   defp _solve(_, t, true) do t end
